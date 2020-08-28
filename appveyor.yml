@@ -10,7 +10,7 @@ dotnet_csproj:
   file_version: '{version}'
   informational_version: '{version}'
 before_build:
-- pwsh: nuget restore src/Rhyous.UnitTesting.sln
+  - nuget restore src/Rhyous.UnitTesting.sln
 configuration:
   Release
 build:
