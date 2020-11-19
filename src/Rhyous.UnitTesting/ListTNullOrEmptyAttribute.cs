@@ -9,7 +9,7 @@ namespace Rhyous.UnitTesting
     {
         public ListTNullOrEmptyAttribute(Type listType)
         {
-            ListType = listType;
+            ListType = listType ?? throw new ArgumentNullException(nameof(listType));
         }
 
         public Type ListType { get; }
@@ -20,14 +20,14 @@ namespace Rhyous.UnitTesting
             var emptylist = Activator.CreateInstance(listType);
             return new []
             {
-                 new object[] { null, "Null" },       // null
-                 new object[] { emptylist, "Empty"},  // Empty
+                 new object[] { null },       // null
+                 new object[] { emptylist },  // Empty
             };
         }
 
         public string GetDisplayName(MethodInfo methodInfo, object[] data)
         {
-            return (string)data[1];
+            return data[0] == null ? "Null" : "Empty";
         }
     }
 }

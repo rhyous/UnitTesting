@@ -7,7 +7,6 @@ namespace Rhyous.UnitTesting
 {
     public class StringIsNullEmptyOrWhitespaceAttribute : Attribute, ITestDataSource
     {
-
         private readonly Dictionary<string, string> NameMap = new Dictionary<string, string>(3)
         {
             { "null", "Null" },
@@ -22,12 +21,12 @@ namespace Rhyous.UnitTesting
         {
             return new[]
             {
-                    new string[] { null}, // null
-                    new string[] { ""},  // Empty
-                    new string[] { " "}, // Whitespace - one space
-                    new string[] { "    "}, // Whitespace - multiple spaces
-                    new string[] { " \t "}, // Whitespace - with tab
-                    new string[] { " \r\n "}, // Whitespace - with carriage return
+                    new string[] { null }, // null
+                    new string[] { "" },  // Empty
+                    new string[] { " " }, // Whitespace - one space
+                    new string[] { "    " }, // Whitespace - multiple spaces
+                    new string[] { " \t " }, // Whitespace - with tab
+                    new string[] { " \r\n " }, // Whitespace - with carriage return
             };
         }
 

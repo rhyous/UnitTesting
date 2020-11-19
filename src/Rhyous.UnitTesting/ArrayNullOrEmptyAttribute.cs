@@ -9,6 +9,11 @@ namespace Rhyous.UnitTesting
     {
         public ArrayNullOrEmptyAttribute(Type arrayType)
         {
+            if (arrayType is null)
+                throw new ArgumentNullException(nameof(arrayType));
+
+            if (!arrayType.IsArray)
+                throw new ArgumentException("The type must be an array", nameof(arrayType));
             ArrayType = arrayType;
         }
 
@@ -19,14 +24,14 @@ namespace Rhyous.UnitTesting
             var emptyArray = Activator.CreateInstance(ArrayType, 0);
             return new[]
             {
-                 new object[] { null, "Null" },       // null
-                 new object[] { emptyArray, "Empty"},  // Empty
+                 new object[] { null },       // null
+                 new object[] { emptyArray },  // Empty
             };
         }
 
         public string GetDisplayName(MethodInfo methodInfo, object[] data)
         {
-            return (string)data[1];
+            return data[0] == null ? "Null" : "Empty";
         }
     }
 }
