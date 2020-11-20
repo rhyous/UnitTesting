@@ -1,6 +1,4 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Rhyous.UnitTesting;
-using System;
 using System.Linq;
 using System.Reflection;
 

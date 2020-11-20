@@ -1,5 +1,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Reflection;
 
 namespace Rhyous.UnitTesting.Tests
 {
@@ -16,12 +17,10 @@ namespace Rhyous.UnitTesting.Tests
         }
 
         [TestMethod]
-        public void ArrayNullOrEmptyAttribute_Constructor_TypeNotArray_Test()
+        public void ArrayNullOrEmptyAttribute_Constructor_TypeNotArrayMakeArray_Test()
         {
-            Assert.ThrowsException<ArgumentException>(() =>
-            {
-                new ArrayNullOrEmptyAttribute(typeof(int));
-            });
+            var attribute = new ArrayNullOrEmptyAttribute(typeof(int));
+            Assert.AreEqual(typeof(int[]), attribute.ArrayType);
         }
 
         [TestMethod]
@@ -30,6 +29,36 @@ namespace Rhyous.UnitTesting.Tests
             var attribute = new ArrayNullOrEmptyAttribute(typeof(int[]));
             var actual = attribute.GetDisplayName(null, new object[] { null });
             Assert.AreEqual("Null", actual);
+        }
+
+        [TestMethod]
+        public void ArrayNullOrEmptyAttribute_GetDisplayName_Null_Test()
+        {
+            // Arrange
+            var arrayNullOrEmptyAttribute = new ArrayNullOrEmptyAttribute(typeof(int));
+            MethodInfo methodInfo = null;
+            object[] data = new object[] { null };
+
+            // Act
+            var result = arrayNullOrEmptyAttribute.GetDisplayName(methodInfo, data);
+
+            // Assert
+            Assert.AreEqual("Null", result);
+        }
+
+        [TestMethod]
+        public void ArrayNullOrEmptyAttribute_GetDisplayName_EmptyObject_Test()
+        {
+            // Arrange
+            var arrayNullOrEmptyAttribute = new ArrayNullOrEmptyAttribute(typeof(int));
+            MethodInfo methodInfo = null;
+            object[] data = new object[] { Array.Empty<int>() };
+
+            // Act
+            var result = arrayNullOrEmptyAttribute.GetDisplayName(methodInfo, data);
+
+            // Assert
+            Assert.AreEqual("Empty Array", result);
         }
     }
 }
