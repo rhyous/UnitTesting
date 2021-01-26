@@ -5,6 +5,11 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <WarningLevel>5</WarningLevel>
+    <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\Rhyous.UnitTesting.xml</DocumentationFile>
+  </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="MSTest.TestFramework" Version="2.1.2" />
   </ItemGroup>
