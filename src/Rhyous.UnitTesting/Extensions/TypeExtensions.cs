@@ -5,14 +5,27 @@ using System.Linq;
 
 namespace Rhyous.UnitTesting
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public static class TypeExtensions
     {
-        public static bool InheritsIList(this Type t)
+        /// <summary>
+        /// Chekcs if a Type is a type that implements IList
+        /// </summary>
+        /// <param name="t">The type</param>
+        /// <returns>Try if the type inherits IList false otherwise.</returns>
+        public static bool IsIList(this Type t)
         {
             return typeof(IList).IsAssignableFrom(t) 
                 || t.GetInterfaces().Any(i => i.IsGenericIList());
         }
 
+        /// <summary>
+        /// Chekcs if a Type is a type that implements IList{}
+        /// </summary>
+        /// <param name="t">The type</param>
+        /// <returns>Try if the type inherits IList{} false otherwise.</returns>
         public static bool IsGenericIList(this Type t)
         {
             return t.IsGenericType && (t.GetGenericTypeDefinition() == typeof(IList<>));
