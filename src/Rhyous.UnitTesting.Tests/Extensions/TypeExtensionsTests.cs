@@ -15,7 +15,7 @@ namespace Rhyous.UnitTesting.Tests.Extensions
             var listChild = new ListChild();
 
             // Act
-            var result = listChild.GetType().InheritsIList();
+            var result = listChild.GetType().IsIList();
 
             // Assert
             Assert.IsTrue(result);
@@ -28,7 +28,7 @@ namespace Rhyous.UnitTesting.Tests.Extensions
             var listChild = new ListChild<string>();
 
             // Act
-            var result = listChild.GetType().InheritsIList();
+            var result = listChild.GetType().IsIList();
 
             // Assert
             Assert.IsTrue(result);

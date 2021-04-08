@@ -31,7 +31,7 @@ namespace Rhyous.UnitTesting
         /// <returns>A null and empty list.</returns>
         public IEnumerable<object[]> GetData(MethodInfo methodInfo)
         {
-            var listType = ListType.InheritsIList()
+            var listType = ListType.IsIList()
                          ? ListType 
                          : typeof(List<>).MakeGenericType(ListType);
             var emptylist = Activator.CreateInstance(listType);
