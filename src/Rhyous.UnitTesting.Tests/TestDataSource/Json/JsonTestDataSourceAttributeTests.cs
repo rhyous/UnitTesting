@@ -30,7 +30,7 @@ namespace Rhyous.UnitTesting.Tests.JsonTestDataSource
             Func<string, string> func = (string input) => 
             {
                 funcWasCalled = true;
-                return "[{ \"TestName\":\"SomeName1\"},{ \"TestName\":\"SomeName2\"}]"; 
+                return "[{ \"TestName\":\"SomeName1\"},{ \"TestName\":\"SomeName2\"},{ \"TestName\":\"AnotherName3\"}]"; 
             };
             jsonTestDataSourceAttribute.FileReadAllTextMethod = func;
             MethodInfo methodInfo = null;
@@ -40,9 +40,10 @@ namespace Rhyous.UnitTesting.Tests.JsonTestDataSource
 
             // Assert
             Assert.IsTrue(funcWasCalled);
-            Assert.AreEqual(2, result.Count);
+            Assert.AreEqual(3, result.Count);
             Assert.AreEqual("SomeName1", (result[0][0] as TestDataModel).TestName);
             Assert.AreEqual("SomeName2", (result[1][0] as TestDataModel).TestName);
+            Assert.AreEqual("AnotherName3", (result[2][0] as TestDataModel).TestName);
         }
         #endregion
 
@@ -70,7 +71,6 @@ namespace Rhyous.UnitTesting.Tests.JsonTestDataSource
             // Arrange
             var jsonTestDataSourceAttribute = new JsonTestDataSourceAttribute(typeof(TestDataModelNoName), @"c:\fake\file");
             MethodInfo methodInfo = null;
-            var testName = "Test A";
             object[] data = new[] { new TestDataModelNoName {  } };
 
             // Act
