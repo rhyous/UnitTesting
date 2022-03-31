@@ -4,12 +4,14 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <Authors>Jared Barneck (Rhyous)</Authors>
     <Company>Rhyous Publishing LLC</Company>
-    <AssemblyVersion>1.0.8.0</AssemblyVersion>
-    <FileVersion>1.0.8.0</FileVersion>
+    <AssemblyVersion>1.0.11.0</AssemblyVersion>
+    <FileVersion>1.0.11.0</FileVersion>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>1.0.8</Version>
+    <Version>1.0.11</Version>
     <WarningLevel>5</WarningLevel>
     <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\$(AssemblyName).xml</DocumentationFile>
+    <SignAssembly>True</SignAssembly>
+    <AssemblyOriginatorKeyFile>..\sn\Rhyous_2022.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
 
   <ItemGroup>

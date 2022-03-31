@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Rhyous.UnitTesting;
+using Rhyous.Collections;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,7 +33,8 @@ namespace Rhyous.UnitTesting.Tests.JsonTestDataSource
                 funcWasCalled = true;
                 return "[{ \"TestName\":\"SomeName1\"},{ \"TestName\":\"SomeName2\"},{ \"TestName\":\"AnotherName3\"}]"; 
             };
-            jsonTestDataSourceAttribute.FileReadAllTextMethod = func;
+            jsonTestDataSourceAttribute.GetFieldInfo("FileReadAllTextMethod")
+                                       .SetValue(jsonTestDataSourceAttribute, func);
             MethodInfo methodInfo = null;
 
             // Act
