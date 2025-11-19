@@ -2,9 +2,16 @@
 
   <PropertyGroup>
     <TargetFramework>net90</TargetFramework>
-
     <IsPackable>false</IsPackable>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>..\Rhyous.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="TestDataSource\**" />
+    <EmbeddedResource Remove="TestDataSource\**" />
+    <None Remove="TestDataSource\**" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.0.1" />
@@ -33,10 +40,6 @@
     <None Update="Examples\Data\ExampleData.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="TestDataSource\" />
   </ItemGroup>
 
 </Project>
