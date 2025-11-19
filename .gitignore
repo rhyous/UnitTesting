@@ -351,3 +351,4 @@ MigrationBackup/
 
 # Ignore the signed assembly key for release products so it is never checked in
 /src/sn/Rhyous_2022_release.snk
+/src/coverage

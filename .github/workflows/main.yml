@@ -25,7 +25,7 @@ on:
   
 env:
   VERSION_PREFIX: '2.0' # The version prefix. Use SemVer to know when to change this.
-  VERSION_OFFSET: -3 # Add this to the version number to get the version number.
+  VERSION_OFFSET: -4 # Add this to the version number to get the version number.
   COMMIT_HASH: ${{ github.event.pull_request.head.sha || github.sha }}
   dotnet-version: '9.0.x'
   
@@ -84,7 +84,7 @@ jobs:
          
       # Build - Release
       - name: Build source
-        run: dotnet build --configuration Debug --no-restore -p:AssemblyVersion=${{ needs.find_version.outputs.ASSEMBLY_VERSION }} -p:FileVersion=${{ needs.find_version.outputs.VERSION }} -p:Version=${{ needs.find_version.outputs.VERSION }} -p:PackageVersion=${{ needs.find_version.outputs.NUGET_VERSION }} -p:RepositoryBranch=${{ github.ref_name }} -p:RepositoryCommit=${{ env.COMMIT_HASH }}
+        run: dotnet build --configuration Release --no-restore -p:AssemblyVersion=${{ needs.find_version.outputs.ASSEMBLY_VERSION }} -p:FileVersion=${{ needs.find_version.outputs.VERSION }} -p:Version=${{ needs.find_version.outputs.VERSION }} -p:PackageVersion=${{ needs.find_version.outputs.NUGET_VERSION }} -p:RepositoryBranch=${{ github.ref_name }} -p:RepositoryCommit=${{ env.COMMIT_HASH }}
           
       # Run Unit Tests
       # Add coverlet.collector nuget Release to test project - 'dotnet add <TestProject.cspoj> package coverlet'
