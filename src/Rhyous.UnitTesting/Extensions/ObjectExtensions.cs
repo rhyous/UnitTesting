@@ -32,7 +32,9 @@ namespace Rhyous.UnitTesting
 
             if (property.Contains(","))
             {
-                var values = property.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries).Select(p => data.GetPropertyValue(p));
+                var values = property.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
+                                     .Select(p => data.GetPropertyValue(p))
+                                     .Where(v => !string.IsNullOrEmpty(v));
                 return string.Join("|", values);
             }
             else

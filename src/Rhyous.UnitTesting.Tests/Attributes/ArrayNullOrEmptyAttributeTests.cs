@@ -37,7 +37,7 @@ namespace Rhyous.UnitTesting.Tests
             // Arrange
             var arrayNullOrEmptyAttribute = new ArrayNullOrEmptyAttribute(typeof(int));
             MethodInfo methodInfo = null;
-            object[] data = new object[] { null };
+            object[] data = [null];
 
             // Act
             var result = arrayNullOrEmptyAttribute.GetDisplayName(methodInfo, data);
@@ -52,7 +52,7 @@ namespace Rhyous.UnitTesting.Tests
             // Arrange
             var arrayNullOrEmptyAttribute = new ArrayNullOrEmptyAttribute(typeof(int));
             MethodInfo methodInfo = null;
-            object[] data = new object[] { Array.Empty<int>() };
+            object[] data = [Array.Empty<int>()];
 
             // Act
             var result = arrayNullOrEmptyAttribute.GetDisplayName(methodInfo, data);

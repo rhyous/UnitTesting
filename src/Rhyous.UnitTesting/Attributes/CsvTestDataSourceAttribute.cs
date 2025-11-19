@@ -69,12 +69,12 @@ namespace Rhyous.UnitTesting
         public string GetDisplayName(MethodInfo methodInfo, object[] data)
         {
             var row = data[0] as Row<string>;
+            var name = data.GetDisplayName(_TestNameColumn);
+            if (!string.IsNullOrWhiteSpace(name))
+                return name;
             if (_HeaderColumnIndexes.Any())
                 return string.Join("|", _HeaderColumnIndexes.Select(index => row[index]));
-            var name = data.GetDisplayName(_TestNameColumn);
-            return string.IsNullOrWhiteSpace(name)
-                 ? $"{++_RowTestId}|{row[0]}"
-                 : name;
+            return $"{++_RowTestId}|{row[0]}";
         }
     }
 }

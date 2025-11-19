@@ -13,7 +13,7 @@ namespace Rhyous.UnitTesting
         /// <returns>Try if the type inherits IList false otherwise.</returns>
         public static bool IsIList(this Type t)
         {
-            return typeof(IList).IsAssignableFrom(t) 
+            return typeof(IList).IsAssignableFrom(t)
                 || t.GetInterfaces().Any(i => i.IsGenericIList());
         }
 

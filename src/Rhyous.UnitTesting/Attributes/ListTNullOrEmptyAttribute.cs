@@ -25,10 +25,10 @@ namespace Rhyous.UnitTesting
         public IEnumerable<object[]> GetData(MethodInfo methodInfo)
         {
             var listType = ListType.IsIList()
-                         ? ListType 
+                         ? ListType
                          : typeof(List<>).MakeGenericType(ListType);
             var emptylist = Activator.CreateInstance(listType);
-            return new []
+            return new[]
             {
                  new object[] { null },       // null
                  new object[] { emptylist },  // Empty

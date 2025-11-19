@@ -29,7 +29,7 @@ namespace Rhyous.UnitTesting.Tests
         public void ObjectNullOrNewAttribute_GetData_Null_Test()
         {
             var attribute = new ObjectNullOrNewAttribute(typeof(int[]));
-            var actual = attribute.GetDisplayName(null, new object[] { null });
+            var actual = attribute.GetDisplayName(null, [null]);
             Assert.AreEqual("Null Int32[]", actual);
         }
 
@@ -39,7 +39,7 @@ namespace Rhyous.UnitTesting.Tests
             // Arrange
             var ObjectNullOrNewAttribute = new ObjectNullOrNewAttribute(typeof(int?));
             MethodInfo methodInfo = null;
-            object[] data = new object[] { null };
+            object[] data = [null];
 
             // Act
             var result = ObjectNullOrNewAttribute.GetDisplayName(methodInfo, data);
@@ -54,7 +54,7 @@ namespace Rhyous.UnitTesting.Tests
             // Arrange
             var ObjectNullOrNewAttribute = new ObjectNullOrNewAttribute(typeof(object));
             MethodInfo methodInfo = null;
-            object[] data = new object[] {new object() };
+            object[] data = [new object()];
 
             // Act
             var result = ObjectNullOrNewAttribute.GetDisplayName(methodInfo, data);
@@ -69,13 +69,14 @@ namespace Rhyous.UnitTesting.Tests
             // Arrange
             var ObjectNullOrNewAttribute = new ObjectNullOrNewAttribute(typeof(SomeClassA));
             MethodInfo methodInfo = null;
-            object[] data = new object[] { new SomeClassA() };
+            object[] data = [new SomeClassA()];
 
             // Act
             var result = ObjectNullOrNewAttribute.GetDisplayName(methodInfo, data);
 
             // Assert
             Assert.AreEqual("New SomeClassA", result);
-        } public class SomeClassA { };
+        }
+        public class SomeClassA { };
     }
 }

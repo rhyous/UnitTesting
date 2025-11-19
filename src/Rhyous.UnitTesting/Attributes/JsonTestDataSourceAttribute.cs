@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Xml.Linq;
 
 namespace Rhyous.UnitTesting
 {
@@ -18,6 +19,7 @@ namespace Rhyous.UnitTesting
         private readonly Type _Type;
         private readonly string _File;
         private readonly string _PropertyName;
+        private int _RowTestId = 0;
 
         /// <summary>A Func which allows for mocking File.Exists in Unit Tests</summary>
         internal Func<string, bool> FileExists = File.Exists;
@@ -56,7 +58,7 @@ namespace Rhyous.UnitTesting
             rows = (testDataSet is IEnumerable<ITestRunOrder> orderedRows)
                  ? orderedRows.OrderBy(o => o.RunOrder)
                  : testDataSet as IEnumerable;
-            
+
             foreach (var row in rows)
                 yield return new object[] { row };
         }
@@ -69,7 +71,10 @@ namespace Rhyous.UnitTesting
         /// <returns>The name of the test being run.</returns>
         public string GetDisplayName(MethodInfo methodInfo, object[] data)
         {
-            return data.GetDisplayName(_PropertyName);
+            var name = data.GetDisplayName(_PropertyName);
+            return string.IsNullOrWhiteSpace(name)
+                 ? $"{++_RowTestId}"
+                 : name;
         }
     }
 }

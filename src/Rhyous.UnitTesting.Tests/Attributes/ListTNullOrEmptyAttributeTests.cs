@@ -132,7 +132,7 @@ namespace Rhyous.UnitTesting.Tests
             // Arrange
             var listTNullOrEmptyAttribute = new ListTNullOrEmptyAttribute(typeof(int));
             MethodInfo methodInfo = null;
-            object[] data = new object[] { null };
+            object[] data = [null];
 
             // Act
             var result = listTNullOrEmptyAttribute.GetDisplayName(methodInfo, data);
@@ -146,7 +146,7 @@ namespace Rhyous.UnitTesting.Tests
             // Arrange
             var listTNullOrEmptyAttribute = new ListTNullOrEmptyAttribute(typeof(int));
             MethodInfo methodInfo = null;
-            object[] data = new object[] { new List<int>() };
+            object[] data = [new List<int>()];
 
             // Act
             var result = listTNullOrEmptyAttribute.GetDisplayName(methodInfo, data);

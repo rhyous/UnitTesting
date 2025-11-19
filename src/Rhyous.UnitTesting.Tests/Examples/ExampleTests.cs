@@ -37,7 +37,7 @@ namespace Rhyous.UnitTesting.Tests
         }
 
         [TestMethod]
-        [CsvTestDataSource(@"Examples\Data\ExampleData.csv")]
+        [CsvTestDataSource(@"Examples/Data/ExampleData.csv")]
         public void CsvTestDataSourceAttribute_Example_Test(Row<string> row)
         {
             Assert.IsNotNull(row);
@@ -52,14 +52,14 @@ namespace Rhyous.UnitTesting.Tests
         /// </summary>
         /// <param name="model">The model</param>
         [TestMethod]
-        [JsonTestDataSource(typeof(List<ExampleDataModel>), @"Examples\Data\ExampleData.json")] // Notice it is a list here
+        [JsonTestDataSource(typeof(List<ExampleDataModel>), @"Examples/Data/ExampleData.json")] // Notice it is a list here
         public void JsonTestDataSourceAttribute_Example_Test(ExampleDataModel model) // Notice it is a single object here
         {
             Assert.IsNotNull(model);
         }
 
         [TestMethod]
-        [XmlTestDataSource(typeof(TestRows), @"Examples\Data\ExampleData.xml")]
+        [XmlTestDataSource(typeof(TestRows), @"Examples/Data/ExampleData.xml")]
         public void XmlTestDataSourceAttribute_Example_Test(TestRow row)
         {
             Assert.IsNotNull(row);

@@ -21,7 +21,7 @@ namespace Rhyous.UnitTesting.Tests.Attributes
             csvTestDataSourceAttribute.GetCurrentDirectory = () => { return @"c:\FakeRootFolder"; };
             var row1 = new List<string> { "Test1", "Value1" };
             var row2 = new List<string> { "Test2", "Value2" };
-            csvTestDataSourceAttribute.CreateCsv = (string file) => 
+            csvTestDataSourceAttribute.CreateCsv = (string file) =>
             {
                 var csv = new Csv();
                 csv.Headers.Add("TestName");

@@ -21,10 +21,10 @@ namespace Rhyous.UnitTesting.Tests
             var funcWasCalled = false;
             jsonTestDataSourceAttribute.FileExists = (string input) => { return true; };
             jsonTestDataSourceAttribute.GetCurrentDirectory = () => { return @"c:\FakeRootFolder"; };
-            jsonTestDataSourceAttribute.FileReadAllTextMethod = (string input) => 
+            jsonTestDataSourceAttribute.FileReadAllTextMethod = (string input) =>
             {
                 funcWasCalled = true;
-                return "[{ \"TestName\":\"SomeName1\"},{ \"TestName\":\"SomeName2\"},{ \"TestName\":\"AnotherName3\"}]"; 
+                return "[{ \"TestName\":\"SomeName1\"},{ \"TestName\":\"SomeName2\"},{ \"TestName\":\"AnotherName3\"}]";
             };
             MethodInfo methodInfo = null;
 
@@ -61,7 +61,7 @@ namespace Rhyous.UnitTesting.Tests
             // Arrange
             var jsonTestDataSourceAttribute = new JsonTestDataSourceAttribute(typeof(List<TestDataModel>), @"relative\file.json");
             var fileExistsCallCount = 0;
-            jsonTestDataSourceAttribute.FileExists = (string input) => 
+            jsonTestDataSourceAttribute.FileExists = (string input) =>
             {
                 fileExistsCallCount++;
                 // First call: relative path doesn't exist
@@ -69,9 +69,9 @@ namespace Rhyous.UnitTesting.Tests
                 return input.Contains(@"c:\FakeRootFolder");
             };
             jsonTestDataSourceAttribute.GetCurrentDirectory = () => { return @"c:\FakeRootFolder"; };
-            jsonTestDataSourceAttribute.FileReadAllTextMethod = (string input) => 
+            jsonTestDataSourceAttribute.FileReadAllTextMethod = (string input) =>
             {
-                return "[{ \"TestName\":\"SomeName1\"}]"; 
+                return "[{ \"TestName\":\"SomeName1\"}]";
             };
             MethodInfo methodInfo = null;
 
@@ -92,7 +92,7 @@ namespace Rhyous.UnitTesting.Tests
             var jsonTestDataSourceAttribute = new JsonTestDataSourceAttribute(typeof(List<TestDataModel>), @"c:\fake\file");
             MethodInfo methodInfo = null;
             var testName = "Test A";
-            object[] data = new[] { new TestDataModel { TestName = testName } };
+            object[] data = [new TestDataModel { TestName = testName }];
 
             // Act
             var result = jsonTestDataSourceAttribute.GetDisplayName(methodInfo, data);
@@ -101,20 +101,19 @@ namespace Rhyous.UnitTesting.Tests
             Assert.AreEqual(testName, result);
         }
 
-
         [TestMethod]
         public void JsonTestDataSourceAttribute_GetDisplayName_ITestNameNotImplemented_Test()
         {
             // Arrange
             var jsonTestDataSourceAttribute = new JsonTestDataSourceAttribute(typeof(TestDataModelNoName), @"c:\fake\file");
             MethodInfo methodInfo = null;
-            object[] data = new[] { new TestDataModelNoName {  } };
+            object[] data = [new TestDataModelNoName { }];
 
             // Act
             var result = jsonTestDataSourceAttribute.GetDisplayName(methodInfo, data);
 
             // Assert
-            Assert.IsNull(result);
+            Assert.AreEqual("1", result);
         }
 
         [TestMethod]
@@ -123,7 +122,7 @@ namespace Rhyous.UnitTesting.Tests
             // Arrange
             var jsonTestDataSourceAttribute = new JsonTestDataSourceAttribute(typeof(List<TestDataModel>), @"c:\fake\file", "SomeTestValue");
             MethodInfo methodInfo = null;
-            object[] data = new[] { new TestDataModelNoName { SomeTestValue = "Custom Value" } };
+            object[] data = [new TestDataModelNoName { SomeTestValue = "Custom Value" }];
 
             // Act
             var result = jsonTestDataSourceAttribute.GetDisplayName(methodInfo, data);
@@ -139,7 +138,7 @@ namespace Rhyous.UnitTesting.Tests
             var jsonTestDataSourceAttribute = new JsonTestDataSourceAttribute(typeof(List<TestDataModel>), @"c:\fake\file", "Id,TestName");
             MethodInfo methodInfo = null;
             var testModel = new TestDataModelWithId { Id = 42, TestName = "Test 42" };
-            object[] data = new[] { testModel };
+            object[] data = [testModel];
 
             // Act
             var result = jsonTestDataSourceAttribute.GetDisplayName(methodInfo, data);
