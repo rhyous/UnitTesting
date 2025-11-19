@@ -10,7 +10,7 @@ namespace Rhyous.UnitTesting.Tests
         [TestMethod]
         public void ArrayNullOrEmptyAttribute_Constructor_TypeNull_Test()
         {
-            Assert.ThrowsException<ArgumentNullException>(() =>
+            Assert.Throws<ArgumentNullException>(() =>
             {
                 new ArrayNullOrEmptyAttribute(null);
             });
@@ -27,7 +27,7 @@ namespace Rhyous.UnitTesting.Tests
         public void ArrayNullOrEmptyAttribute_GetData_Null_Test()
         {
             var attribute = new ArrayNullOrEmptyAttribute(typeof(int[]));
-            var actual = attribute.GetDisplayName(null, new object[] { null });
+            var actual = attribute.GetDisplayName(null, [null]);
             Assert.AreEqual("Null", actual);
         }
 

@@ -10,7 +10,7 @@ namespace Rhyous.UnitTesting.Tests
         [TestMethod]
         public void ObjectNullOrNewAttribute_Constructor_TypeNull_Test()
         {
-            Assert.ThrowsException<ArgumentNullException>(() =>
+            Assert.Throws<ArgumentNullException>(() =>
             {
                 new ObjectNullOrNewAttribute(null);
             });
@@ -19,7 +19,7 @@ namespace Rhyous.UnitTesting.Tests
         [TestMethod]
         public void ObjectNullOrNewAttribute_Constructor_TypeNotNullable_Test()
         {
-            Assert.ThrowsException<InvalidOperationException>(() =>
+            Assert.Throws<InvalidOperationException>(() =>
             {
                 var ObjectNullOrNewAttribute = new ObjectNullOrNewAttribute(typeof(int)); ;
             });
