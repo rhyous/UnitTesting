@@ -19,7 +19,7 @@ namespace Rhyous.UnitTesting.Tests
             var result = int32TestValuesAttribute.GetData(methodInfo).ToList();
 
             // Assert
-            Assert.AreEqual(9, result.Count);
+            Assert.HasCount(9, result);
             int i = 0;
             foreach (var d in result)
                 Assert.AreEqual(expectedArray[i++], d[0]);
@@ -38,7 +38,7 @@ namespace Rhyous.UnitTesting.Tests
             var result = int32TestValuesAttribute.GetData(methodInfo).ToList();
 
             // Assert
-            Assert.AreEqual(13, result.Count);
+            Assert.HasCount(13, result);
             int i = 0;
             foreach (var d in result)
                 Assert.AreEqual(expectedArray[i++], d[0]);
@@ -57,7 +57,7 @@ namespace Rhyous.UnitTesting.Tests
             var result = int32TestValuesAttribute.GetData(methodInfo).ToList();
 
             // Assert
-            Assert.AreEqual(13, result.Count);
+            Assert.HasCount(13, result);
             int i = 0;
             foreach (var d in result)
                 Assert.AreEqual(expectedArray[i++], d[0]);

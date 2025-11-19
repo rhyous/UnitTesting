@@ -20,7 +20,7 @@ namespace Rhyous.UnitTesting.Tests
             var result = listTNullOrEmptyAttribute.GetData(methodInfo).ToList();
 
             // Assert
-            Assert.AreEqual(2, result.Count);
+            Assert.HasCount(2, result);
         }
 
 
@@ -35,7 +35,7 @@ namespace Rhyous.UnitTesting.Tests
             var result = listTNullOrEmptyAttribute.GetData(methodInfo).ToList();
 
             // Assert
-            Assert.AreEqual(2, result.Count);
+            Assert.HasCount(2, result);
         }
 
 
@@ -53,7 +53,7 @@ namespace Rhyous.UnitTesting.Tests
             // Assert
             Assert.IsNull(result[0][0]);
             Assert.AreEqual(type, result[1][0].GetType());
-            Assert.AreEqual(2, result.Count);
+            Assert.HasCount(2, result);
         }
 
         [TestMethod]
@@ -70,7 +70,7 @@ namespace Rhyous.UnitTesting.Tests
             // Assert
             Assert.IsNull(result[0][0]);
             Assert.AreEqual(type, result[1][0].GetType());
-            Assert.AreEqual(2, result.Count);
+            Assert.HasCount(2, result);
         }
 
         [TestMethod]
@@ -87,7 +87,7 @@ namespace Rhyous.UnitTesting.Tests
             // Assert
             Assert.IsNull(result[0][0]);
             Assert.AreEqual(type, result[1][0].GetType());
-            Assert.AreEqual(2, result.Count);
+            Assert.HasCount(2, result);
         }
 
         [TestMethod]
@@ -104,7 +104,7 @@ namespace Rhyous.UnitTesting.Tests
             // Assert
             Assert.IsNull(result[0][0]);
             Assert.AreEqual(type, result[1][0].GetType());
-            Assert.AreEqual(2, result.Count);
+            Assert.HasCount(2, result);
         }
 
         [TestMethod]
@@ -121,7 +121,7 @@ namespace Rhyous.UnitTesting.Tests
             // Assert
             Assert.IsNull(result[0][0]);
             Assert.AreEqual(type, result[1][0].GetType());
-            Assert.AreEqual(2, result.Count);
+            Assert.HasCount(2, result);
         }
         #endregion
 

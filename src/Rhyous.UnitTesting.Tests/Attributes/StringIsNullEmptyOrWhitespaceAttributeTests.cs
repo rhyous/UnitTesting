@@ -20,7 +20,7 @@ namespace Rhyous.UnitTesting.Tests
             // Assert
             Assert.AreEqual(6, result.Count());
             foreach (var item in result)
-                Assert.AreEqual(1, item.Length);
+                Assert.HasCount(1, item);
         }
     }
 }

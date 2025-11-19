@@ -4,25 +4,37 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <Authors>Jared Barneck (Rhyous)</Authors>
     <Company>Rhyous Publishing LLC</Company>
-    <AssemblyVersion>2.0.0.0</AssemblyVersion>
-    <FileVersion>2.0.0.0</FileVersion>
+    <AssemblyVersion>1.0.11.0</AssemblyVersion>
+    <FileVersion>1.0.11.0</FileVersion>
+    <SignAssembly Condition="'$(Configuration)' == 'Release'">True</SignAssembly>
+    <AssemblyOriginatorKeyFile Condition="'$(Configuration)' == 'Release'">..\Rhyous.snk</AssemblyOriginatorKeyFile>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Version>2.0.0</Version>
     <WarningLevel>5</WarningLevel>
     <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\$(AssemblyName).xml</DocumentationFile>
-    <SignAssembly>True</SignAssembly>
-    <AssemblyOriginatorKeyFile>..\sn\Rhyous_2022.snk</AssemblyOriginatorKeyFile>
+    <Description>A project to make unit test faster with test attributes.</Description>
+    <Copyright>Rhyous Publishing LLC</Copyright>
+    <PackageProjectUrl>https://github.com/rhyous/UnitTesting</PackageProjectUrl>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <RepositoryUrl>https://github.com/rhyous/UnitTesting</RepositoryUrl>
+    <PackageTags>C#;Unit Testing;MSTest</PackageTags>
+    
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="MSTest.TestFramework" Version="4.0.2" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
+    <PackageReference Include="Rhyous.EasyCsv" Version="1.3.0" />
   </ItemGroup>
 
   <ItemGroup>
     <None Include="..\..\License.txt">
       <Pack>True</Pack>
       <PackagePath></PackagePath>
+    </None>
+    <None Include="..\..\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
     </None>
   </ItemGroup>
 

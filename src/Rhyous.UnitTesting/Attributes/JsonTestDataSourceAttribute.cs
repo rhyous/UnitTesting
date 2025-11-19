@@ -17,16 +17,24 @@ namespace Rhyous.UnitTesting
     {
         private readonly Type _Type;
         private readonly string _File;
+        private readonly string _PropertyName;
+
+        /// <summary>A Func which allows for mocking File.Exists in Unit Tests</summary>
+        internal Func<string, bool> FileExists = File.Exists;
+        /// <summary>A Func which allows for mocking Directory.GetCurrentDirectory in Unit Tests</summary>
+        internal Func<string> GetCurrentDirectory = Directory.GetCurrentDirectory;
         /// <summary>A Func which allows for mocking File.ReadAllText in Unit Tests</summary>
         internal Func<string, string> FileReadAllTextMethod = File.ReadAllText;
 
         /// <summary>The Attribute constructor</summary>
         /// <param name="type">The type</param>
         /// <param name="file">The file path</param>
-        public JsonTestDataSourceAttribute(Type type, string file)
+        /// <param name="testNameProperty">The property name to use as the test display name. Supports multiple properties, comma separated.</param>
+        public JsonTestDataSourceAttribute(Type type, string file, string testNameProperty = null)
         {
             _Type = type;
             _File = file;
+            _PropertyName = testNameProperty;
         }
 
         /// <summary>Gets the data. This is called by test methods.</summary>
@@ -34,7 +42,15 @@ namespace Rhyous.UnitTesting
         /// <returns></returns>
         public IEnumerable<object[]> GetData(MethodInfo methodInfo)
         {
-            var json = FileReadAllTextMethod(_File);
+            var file = _File;
+            if (!FileExists(file))
+            {
+                // Try full path
+                file = Path.Combine(GetCurrentDirectory(), file);
+                if (!FileExists(file))
+                    throw new FileNotFoundException($"Could not find test data file. Searched:{Environment.NewLine}{_File}{Environment.NewLine}{file}");
+            }
+            var json = FileReadAllTextMethod(file);
             var testDataSet = JsonConvert.DeserializeObject(json, _Type);
             IEnumerable rows;
             rows = (testDataSet is IEnumerable<ITestRunOrder> orderedRows)
@@ -47,22 +63,13 @@ namespace Rhyous.UnitTesting
 
         /// <summary>
         /// Returns the name of the test.
-        /// If your data model implements both ITestRunOrder and ITestName, the format is "{RunOrder}:{TestName}".
-        /// If you data model implements only ITestRunOrder, the name is the format is "{RunOrder}". 
-        /// If you data model implements only ITestName, the name is the format is "{TestName}".
-        /// If neither are implemented, the test name returns null.
         /// </summary>
         /// <param name="methodInfo">The test method</param>
         /// <param name="data">The data passed into the test.</param>
         /// <returns>The name of the test being run.</returns>
         public string GetDisplayName(MethodInfo methodInfo, object[] data)
         {
-            string name = null;
-            if (data[0] is ITestRunOrder testOrder)
-                name += $"{testOrder.RunOrder}";
-            if (data[0] is ITestName testName)
-                name += string.IsNullOrWhiteSpace(name) ? testName.TestName : $":{testName.TestName}";
-            return name;
+            return data.GetDisplayName(_PropertyName);
         }
     }
 }

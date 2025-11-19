@@ -1,13 +1,12 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
+using Rhyous.EasyCsv;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 
 namespace Rhyous.UnitTesting.Tests
 {
     [TestClass]
-    public class ArrayNullOrEmptyAttributeExampleTests
+    public class ExampleTests
     {
         [TestMethod]
         [ArrayNullOrEmpty(typeof(string))]
@@ -27,7 +26,7 @@ namespace Rhyous.UnitTesting.Tests
         [PrimitiveList(0, -1, int.MinValue)]
         public void PrimitiveList_Example_LessThan1_Test(int i)
         {
-            Assert.IsTrue(i < 1);
+            Assert.IsLessThan(1, i);
         }
 
         [TestMethod]
@@ -35,6 +34,13 @@ namespace Rhyous.UnitTesting.Tests
         public void ListTNullOrEmptyAttribute_Example_Test(string str)
         {
             Assert.IsTrue(string.IsNullOrWhiteSpace(str));
+        }
+
+        [TestMethod]
+        [CsvTestDataSource(@"Examples\Data\ExampleData.csv")]
+        public void CsvTestDataSourceAttribute_Example_Test(Row<string> row)
+        {
+            Assert.IsNotNull(row);
         }
 
         /// <summary>
@@ -49,8 +55,15 @@ namespace Rhyous.UnitTesting.Tests
         [JsonTestDataSource(typeof(List<ExampleDataModel>), @"Examples\Data\ExampleData.json")] // Notice it is a list here
         public void JsonTestDataSourceAttribute_Example_Test(ExampleDataModel model) // Notice it is a single object here
         {
-            var testValue = model.SomeTestValue;
             Assert.IsNotNull(model);
         }
+
+        [TestMethod]
+        [XmlTestDataSource(typeof(TestRows), @"Examples\Data\ExampleData.xml")]
+        public void XmlTestDataSourceAttribute_Example_Test(TestRow row)
+        {
+            Assert.IsNotNull(row);
+        }
+
     }
 }
